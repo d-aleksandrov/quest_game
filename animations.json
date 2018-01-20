@@ -1,0 +1,32 @@
+{
+	"QuestTextShow" : {
+		"type"		: "show",
+		"sequence"	: [
+			{
+				"y"	: -500
+			},
+			{
+				"t"	: 1
+			},
+			{
+				"y" : 0,
+				"t"	: 0.7
+			}
+		]
+	},
+	"QuestButtonRightShow" : {
+		"type"		: "show",
+		"sequence"	: [
+			{
+				"xw"	:	1.5 
+			},
+			{
+				"t"		: 3
+			},
+			{
+				"x"		: 0,
+				"t"		: 1
+			}
+		]
+	}
+}
