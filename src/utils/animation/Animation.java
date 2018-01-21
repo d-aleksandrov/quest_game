@@ -14,8 +14,9 @@ public class Animation implements ITickable {
     private Long stTime = -1L;
     private Long currPartTime = 0L;
     private Long lastShowedTime = 0L;
+
     private AnimationState state = AnimationState.STOPPED;
-    private int currenrtAnimationPos;
+    private int curAnimationPos;
 
     private AnimationProcessor processor;
 
@@ -31,7 +32,7 @@ public class Animation implements ITickable {
 
     public void start() {
         if (state != AnimationState.PLAYED && animations.size() > 0) {
-            currenrtAnimationPos = 0;
+            curAnimationPos = 0;
             GlobalTimer.add(this);
             processor.addNext(animations.get(0));
             state = AnimationState.PLAYED;
@@ -44,18 +45,20 @@ public class Animation implements ITickable {
             lastShowedTime = stTime = newTime;
         }
 
-        System.out.print(currPartTime);
-        System.out.print(' ');
-        System.out.println(animations.size());
         currPartTime += newTime - lastShowedTime;
+        lastShowedTime = newTime;
+
+        if(currPartTime > processor.currTime())
+            currPartTime = (long)processor.currTime();
+
         processor.update(currPartTime);
-        if (currPartTime > processor.currTime()) {
-            if (currenrtAnimationPos < animations.size()) {
+        if (currPartTime == processor.currTime()) {
+            if (curAnimationPos >= animations.size()-1) {
                 state = AnimationState.FINISHED;
                 return false;
             } else {
-                currenrtAnimationPos++;
-                processor.addNext(animations.get(currenrtAnimationPos));
+                curAnimationPos++;
+                processor.addNext(animations.get(curAnimationPos));
                 currPartTime = 0L;
                 return true;
             }

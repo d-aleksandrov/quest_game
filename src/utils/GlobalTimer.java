@@ -32,28 +32,36 @@ public class GlobalTimer {
             public void run() {
                 tickAll();
             }
-        }, 1000 / fps, 1000 / fps);
+        }, 0, 1000 / fps);
 
         AnimationPart pt_1 = new AnimationPart();
         pt_1.t = 1000;
+        pt_1.x = 2;
 
         AnimationPart pt_2 = new AnimationPart();
-        pt_1.t = 100;
+        pt_2.t = 2000;
+        pt_2.y = 3;
 
         AnimationPart pt_3 = new AnimationPart();
-        pt_1.t = 500;
+        pt_3.t = 500;
+        pt_3.x = -2;
+        pt_3.y = -3;
+
         ArrayList<AnimationPart> parts = new ArrayList<>();
         parts.add(pt_1);
         parts.add(pt_2);
         parts.add(pt_3);
 
-        new Animation( parts, new JPanel()).start();
+        JPanel panel = new JPanel();
+        panel.setBounds(0,0,100, 100);
+
+        new Animation( parts, panel).start();
     }
 
 
     private static int step = 0;
     private static void tickAll() {
-        System.out.println(step);
+    //    System.out.println(step);
         step++;
         ArrayList<ITickable> removedElements = new ArrayList<>();
         Long time = System.currentTimeMillis();

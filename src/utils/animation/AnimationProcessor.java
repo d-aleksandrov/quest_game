@@ -1,6 +1,7 @@
 package utils.animation;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class AnimationProcessor {
 
@@ -27,7 +28,7 @@ public class AnimationProcessor {
     }
 
     public void update(long time) {
-        float progress = currTime() / ((float) time);
+        float progress = ((float) time) / currTime();
 
         float x = prevtState.x;
         float y = prevtState.y;
@@ -40,5 +41,20 @@ public class AnimationProcessor {
         if (part.h != 1) h = prevtState.h * (1 - progress) * part.h;
 
         view.setBounds((int) x, (int) y, (int) w, (int) h);
+
+        trace(progress);
+    }
+
+    private void trace(float progress) {
+        Rectangle rect = view.getBounds();
+        System.out.print(progress);
+        System.out.print('\t');
+        System.out.print(rect.x);
+        System.out.print('\t');
+        System.out.print(rect.y);
+        System.out.print('\t');
+        System.out.print(rect.width);
+        System.out.print('\t');
+        System.out.println(rect.height);
     }
 }

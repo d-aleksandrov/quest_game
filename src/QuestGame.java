@@ -15,7 +15,7 @@ public class QuestGame {
         GSP.parse();
 
         StartScreenForm mainQuestWindow = new StartScreenForm();
-        GlobalTimer.initialize(5);
+        GlobalTimer.initialize(30);
 
 
     //    mainQuestWindow.initQuest(GameSettingsParser.firstQuest);
